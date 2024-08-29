@@ -1,6 +1,8 @@
 package com.example.filmlerapp.repo
 
 import com.atilsamancioglu.cryptocrazycompose.util.Resource
+import com.example.filmlerapp.model.FilterCategoryMovies
+import com.example.filmlerapp.model.Genre
 import com.example.filmlerapp.model.MoviesCategory
 import com.example.filmlerapp.model.PopulerMovies
 import com.example.filmlerapp.model.TopRated
@@ -50,6 +52,16 @@ class MoviesRepo @Inject constructor(private val api:MoviesApi) {
     suspend fun resourceUpComing():Resource<UpComing>{
         val response=try {
             api.getUpComing(Constans.API_KEY)
+        }
+        catch (e:Exception){
+            return Resource.Error("Error")
+        }
+        return Resource.Success(response)
+    }
+
+    suspend fun resourceFilterCategoryMovies(category:Int):Resource<FilterCategoryMovies>{
+        val response=try {
+            api.getFilterCategoryMovies(key = category)
         }
         catch (e:Exception){
             return Resource.Error("Error")

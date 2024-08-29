@@ -131,4 +131,30 @@ class HomePageViewModel @Inject constructor(private val repo:MoviesRepo ):ViewMo
             }
         }
     }
+
+
+
+    /* fun <T> loadData(
+         resultList:MutableState<List<T>>,
+         dataFetcher:suspend ()->Resource<List<T>>,
+         errorMessage:MutableState<String>,
+     ) {
+         viewModelScope.launch {
+             isLoading.value=true
+             val result=dataFetcher()
+             when(result){
+                 is Resource.Success->{
+                     errorMessage.value=result.message!!
+                     isLoading.value=false
+                     resultList.value +=result.data ?: listOf()
+                 }
+                 is Resource.Error->{
+
+                 }
+                 else->{
+                     Log.e("viewModel","ViewModel Error")
+                 }
+             }
+         }
+    }*/
 }

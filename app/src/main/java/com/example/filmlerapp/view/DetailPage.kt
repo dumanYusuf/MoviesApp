@@ -45,7 +45,9 @@ fun DetailPage(movie:ResultPopuler){
                Row (modifier = Modifier
                    .fillMaxWidth()
                    .padding(innerPadding)){
-                   Text(text = "Watching Movies")
+                   Text(
+                       modifier = Modifier.padding(horizontal = 10.dp),
+                       text = "Watching Movies")
                    Spacer(modifier = Modifier.size(5.dp))
                    Text(text = ">")
                    Spacer(modifier = Modifier.size(5.dp))

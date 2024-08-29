@@ -17,8 +17,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.filmlerapp.model.Genre
 import com.example.filmlerapp.model.ResultPopuler
 import com.example.filmlerapp.ui.theme.FilmlerAppTheme
+import com.example.filmlerapp.view.CategoryFilterMoviesPage
 import com.example.filmlerapp.view.DetailPage
 import com.example.filmlerapp.view.HomePage
 import com.google.gson.Gson
@@ -58,6 +60,15 @@ fun PageNavigator(){
             val movie = Gson().fromJson(decodedJsonMovie, ResultPopuler::class.java)
             DetailPage(movie = movie)
 
+        }
+        composable("filterPage/{genreId}",
+            arguments = listOf(
+                navArgument("genreId"){type=NavType.StringType}
+            )
+        ){
+            val jsonGenreId=it.arguments?.getString("genreId")
+            val genreId=Gson().fromJson(jsonGenreId,Genre::class.java)
+            CategoryFilterMoviesPage(genreId)
         }
     }
 }

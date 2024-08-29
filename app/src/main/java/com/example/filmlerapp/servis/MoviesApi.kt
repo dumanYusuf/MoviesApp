@@ -1,5 +1,6 @@
 package com.example.filmlerapp.servis
 
+import com.example.filmlerapp.model.FilterCategoryMovies
 import com.example.filmlerapp.model.MoviesCategory
 import com.example.filmlerapp.model.PopulerMovies
 import com.example.filmlerapp.model.TopRated
@@ -34,5 +35,12 @@ interface MoviesApi {
     suspend fun getUpComing(
         @Query("key") key:String
     ):UpComing
+
+    // categoryFilterMovies
+
+    @GET("discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&api_key=9a618ccc9cc8813ecec78a18eaf88721")
+    suspend fun getFilterCategoryMovies(
+        @Query(value = "key") key: Int
+    ):FilterCategoryMovies
 
 }

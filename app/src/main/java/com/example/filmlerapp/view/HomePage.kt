@@ -73,7 +73,10 @@ fun HomePage(
                                 colors = ButtonDefaults.buttonColors(
                                     containerColor = Color.Gray
                                 ),
-                                onClick = { }
+                                onClick = {
+                                    val objectGenreId=Gson().toJson(category)
+                                    navController.navigate("filterPage/$objectGenreId")
+                                }
                             ) {
                                 Text(text = category.name)
                             }
