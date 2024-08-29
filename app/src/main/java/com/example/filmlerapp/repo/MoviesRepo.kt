@@ -3,6 +3,7 @@ package com.example.filmlerapp.repo
 import com.atilsamancioglu.cryptocrazycompose.util.Resource
 import com.example.filmlerapp.model.MoviesCategory
 import com.example.filmlerapp.model.PopulerMovies
+import com.example.filmlerapp.model.TopRated
 import com.example.filmlerapp.servis.MoviesApi
 import com.example.filmlerapp.util.Constans
 import dagger.hilt.android.scopes.ActivityScoped
@@ -28,6 +29,16 @@ class MoviesRepo @Inject constructor(private val api:MoviesApi) {
     suspend fun resourcePopulerMovies():Resource<PopulerMovies>{
         val response=try{
             api.getPopulerMovies(Constans.API_KEY)
+        }
+        catch (e:Exception){
+            return Resource.Error("Error")
+        }
+        return Resource.Success(response)
+    }
+
+    suspend fun resourseTopRated():Resource<TopRated>{
+        val response=try{
+            api.getTopRated(Constans.API_KEY)
         }
         catch (e:Exception){
             return Resource.Error("Error")
