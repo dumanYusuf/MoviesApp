@@ -3,6 +3,7 @@ package com.example.filmlerapp.view
 import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,15 +34,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.example.filmlerapp.R
 import com.example.filmlerapp.util.Constans
 import com.example.filmlerapp.viewModel.HomePageViewModel
+import com.google.gson.Gson
+import java.net.URLEncoder
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HomePage(
+    navController: NavController,
     viewModel: HomePageViewModel = hiltViewModel()
 ) {
     Scaffold(
@@ -101,7 +106,12 @@ fun HomePage(
 
                                Box(modifier = Modifier.fillMaxWidth()){
                                    Image(
-                                       modifier = Modifier.size(250.dp),
+                                       modifier = Modifier.size(250.dp).clickable {
+                                           val movieObject = Gson().toJson(populerMovies)
+                                           val encodedMovieObject = URLEncoder.encode(movieObject, "UTF-8")
+                                           navController.navigate("detailPage/$encodedMovieObject")
+
+                                       },
                                        painter = rememberImagePainter(data = imageUrl),
                                        contentDescription = "Movie Backdrop",
                                        contentScale = ContentScale.Crop
@@ -186,7 +196,12 @@ fun HomePage(
 
                                 Box(modifier = Modifier.fillMaxWidth()){
                                     Image(
-                                        modifier = Modifier.size(250.dp),
+                                        modifier = Modifier.size(250.dp).clickable {
+                                            val movieObject = Gson().toJson(topRatedMovies)
+                                            val encodedMovieObject = URLEncoder.encode(movieObject, "UTF-8")
+                                            navController.navigate("detailPage/$encodedMovieObject")
+
+                                        },
                                         painter = rememberImagePainter(data = imageUrl),
                                         contentDescription = "Movie Backdrop",
                                         contentScale = ContentScale.Crop
@@ -272,7 +287,12 @@ fun HomePage(
 
                                 Box(modifier = Modifier.fillMaxWidth()){
                                     Image(
-                                        modifier = Modifier.size(250.dp),
+                                        modifier = Modifier.size(250.dp).clickable {
+                                            val movieObject = Gson().toJson(upComingList)
+                                            val encodedMovieObject = URLEncoder.encode(movieObject, "UTF-8")
+                                            navController.navigate("detailPage/$encodedMovieObject")
+
+                                        },
                                         painter = rememberImagePainter(data = imageUrl),
                                         contentDescription = "Movie Backdrop",
                                         contentScale = ContentScale.Crop
