@@ -23,4 +23,7 @@ object Constans {
   // /movie/top_rated?language=en-US&page=1&api_key=9a618ccc9cc8813ecec78a18eaf88721
 
 
+    // upComing
+    //https://api.themoviedb.org/3/
+  // movie/upcoming?language=en-US&page=1&api_key=9a618ccc9cc8813ecec78a18eaf88721
 }

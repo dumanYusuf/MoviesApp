@@ -1,6 +1,7 @@
 package com.example.filmlerapp.viewModel
 
 import android.util.Log
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,6 +10,7 @@ import com.atilsamancioglu.cryptocrazycompose.util.Resource
 import com.example.filmlerapp.model.Genre
 import com.example.filmlerapp.model.ResultPopuler
 import com.example.filmlerapp.model.ResultTopRated
+import com.example.filmlerapp.model.ResultUpComing
 import com.example.filmlerapp.repo.MoviesRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -22,6 +24,7 @@ class HomePageViewModel @Inject constructor(private val repo:MoviesRepo ):ViewMo
     val moviesListCategory= mutableStateOf<List<Genre>>(listOf())
     val populerListCategory= mutableStateOf<List<ResultPopuler>>(listOf())
     val topRatedListCategory= mutableStateOf<List<ResultTopRated>>(listOf())
+    val upComingList= mutableStateOf<List<ResultUpComing>>(listOf())
     val errorMessage= mutableStateOf("")
     val isLoading= mutableStateOf(false)
 
@@ -29,6 +32,7 @@ class HomePageViewModel @Inject constructor(private val repo:MoviesRepo ):ViewMo
         loadMoviesCategory()
         loadPopulerMovies()
         loadTopRatedMovies()
+        loadUpComing()
     }
 
     fun loadMoviesCategory(){
@@ -92,6 +96,31 @@ class HomePageViewModel @Inject constructor(private val repo:MoviesRepo ):ViewMo
                     errorMessage.value=""
                     isLoading.value=false
                     topRatedListCategory.value +=categoryItem
+                }
+                is Resource.Error->{
+                    errorMessage.value=result.message!!
+                }
+                else->{
+                    Log.e("viewModel","top Rated Error")
+                }
+            }
+        }
+    }
+
+    fun loadUpComing(){
+        viewModelScope.launch {
+            isLoading.value=true
+            val result=repo.resourceUpComing()
+            when(result){
+                is Resource.Success->{
+                    val categoryItem=result.data!!.results.mapIndexed { index, item ->
+                        ResultUpComing(item.adult,item.backdrop_path,item.id,item.original_language,item.original_title,item.overview,item.popularity,item.poster_path,item.release_date,item.title,item.video,item.vote_average,item.vote_count)
+                    }
+                    Log.e("viewModel","topRated succsess")
+
+                    errorMessage.value=""
+                    isLoading.value=false
+                    upComingList.value +=categoryItem
                 }
                 is Resource.Error->{
                     errorMessage.value=result.message!!
