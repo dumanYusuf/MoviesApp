@@ -38,9 +38,17 @@ interface MoviesApi {
 
     // categoryFilterMovies
 
-    @GET("discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&api_key=9a618ccc9cc8813ecec78a18eaf88721")
+  /*  @GET("discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&api_key=9a618ccc9cc8813ecec78a18eaf88721")
     suspend fun getFilterCategoryMovies(
         @Query(value = "key") key: Int
     ):FilterCategoryMovies
+*/
 
+    @GET("discover/movie")
+    suspend fun getFilterCategoryMovies(
+        @Query("api_key") apiKey: String = "9a618ccc9cc8813ecec78a18eaf88721",
+        @Query("with_genres") genreId: Int,
+    ): FilterCategoryMovies
+    //https://api.themoviedb.org/3/
+// discover/movie?api_key=9a618ccc9cc8813ecec78a18eaf88721&with_genres=28&include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc
 }

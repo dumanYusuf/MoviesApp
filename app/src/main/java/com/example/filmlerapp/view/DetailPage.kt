@@ -38,7 +38,8 @@ fun DetailPage(movie:ResultPopuler){
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = movie.original_title)})
+                title = { Text(text = movie.original_title
+                    )})
         },
         content = {innerPadding->
            Column(modifier = Modifier.fillMaxSize()) {
@@ -87,7 +88,7 @@ fun DetailPage(movie:ResultPopuler){
                       Image(
                           modifier = Modifier
                               .fillMaxWidth()
-                              .padding(10.dp),
+                              .size(250.dp),
                           contentScale = ContentScale.Crop,
                           painter = rememberImagePainter(data =imageUrl), contentDescription = "")
                      Icon(

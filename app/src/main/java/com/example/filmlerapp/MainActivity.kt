@@ -68,7 +68,7 @@ fun PageNavigator(){
         ){
             val jsonGenreId=it.arguments?.getString("genreId")
             val genreId=Gson().fromJson(jsonGenreId,Genre::class.java)
-            CategoryFilterMoviesPage(genreId)
+            CategoryFilterMoviesPage(navController = navController, genreID = genreId)
         }
     }
 }

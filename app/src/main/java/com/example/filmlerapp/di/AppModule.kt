@@ -24,8 +24,4 @@ object AppModule {
             .build().create(MoviesApi::class.java)
     }
 
-
-
-
-
 }

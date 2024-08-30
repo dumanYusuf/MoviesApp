@@ -31,6 +31,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.example.filmlerapp.R
 import com.example.filmlerapp.model.Genre
@@ -44,6 +45,7 @@ import java.net.URLEncoder
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun CategoryFilterMoviesPage(
+    navController: NavController,
     genreID:Genre,
     viewModel:CategoryFilterViewModel= hiltViewModel()
 )
@@ -61,7 +63,7 @@ fun CategoryFilterMoviesPage(
             LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 5.dp)
+                    .padding(top = 110.dp)
             ) {
                 items(viewModel.filterCategoryMoviesList.value) { filter ->
                     Card (modifier = Modifier
@@ -80,7 +82,7 @@ fun CategoryFilterMoviesPage(
                                     modifier = Modifier.fillMaxWidth().height(300.dp).clickable {
                                         val movieObject = Gson().toJson(filter)
                                         val encodedMovieObject = URLEncoder.encode(movieObject, "UTF-8")
-                                        //navController.navigate("detailPage/$encodedMovieObject")
+                                        navController.navigate("detailPage/$encodedMovieObject")
 
                                     },
                                     painter = rememberImagePainter(data = imageUrl),
