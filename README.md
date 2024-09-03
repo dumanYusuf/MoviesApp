@@ -3,3 +3,4 @@ Merhabalar, bu uygulamamda MVVM mimarisine uygun bir şekilde geliştirdiğim Fi
 
 ![image alt](https://github.com/dumanYusuf/MoviesApp/blob/master/moviesApp1.png?raw=true)
 ![image alt](https://github.com/dumanYusuf/MoviesApp/blob/master/moviesApp2.png?raw=true)
+![image alt](https://github.com/dumanYusuf/MoviesApp/blob/master/moviesApp3.png?raw=true)
